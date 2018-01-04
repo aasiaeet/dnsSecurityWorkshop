@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2017.1.22)  4 JAN 2018 17:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2017.1.22)  4 JAN 2018 17:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**./dnsSecurityWorkshop.tex
-(./dnsSecurityWorkshop.tex
+**./dnsSecurityWorkshop18.tex
+(./dnsSecurityWorkshop18.tex
 LaTeX2e <2016/03/31> patch level 3
 Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
 (./IEEEtran.cls
@@ -413,8 +413,8 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 147.
 )
-(./dnsSecurityWorkshop.aux)
-\openout1 = `dnsSecurityWorkshop.aux'.
+(./dnsSecurityWorkshop18.aux)
+\openout1 = `dnsSecurityWorkshop18.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
 LaTeX Font Info:    ... okay on input line 16.
@@ -507,29 +507,28 @@ Package caption Info: End \AtBeginDocument code.
 \c@lemm=\count125
 \c@corr=\count126
 \c@clm=\count127
-)
-LaTeX Font Info:    Try loading font information for U+msa on input line 57.
- (c:/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
+) (./sections/abstract.tex) (./sections/intro.tex [1{c:/texlive/2016/texmf-var/
+fonts/map/pdftex/updmap/pdftex.map}
+
+
+]) (./sections/prob.tex
+LaTeX Font Info:    Try loading font information for U+msa on input line 31.
+
+(c:/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 57.
+LaTeX Font Info:    Try loading font information for U+msb on input line 31.
 
 (c:/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 57.
- [1{c:/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
-
-
-]
 
 pdfTeX warning: pdflatex.exe (file ./img/mc.pdf): PDF inclusion: found PDF vers
 ion <1.6>, but at most version <1.5> allowed
 <./img/mc.pdf, id=10, 224.69345pt x 58.28976pt>
 File: ./img/mc.pdf Graphic file (type pdf)
  <use ./img/mc.pdf>
-Package pdftex.def Info: ./img/mc.pdf used on input line 233.
+Package pdftex.def Info: ./img/mc.pdf used on input line 53.
 (pdftex.def)             Requested size: 72.23969pt x 18.74026pt.
 
 
@@ -538,7 +537,7 @@ sion <1.6>, but at most version <1.5> allowed
 <./img/hmm.pdf, id=11, 226.18703pt x 160.9222pt>
 File: ./img/hmm.pdf Graphic file (type pdf)
  <use ./img/hmm.pdf>
-Package pdftex.def Info: ./img/hmm.pdf used on input line 236.
+Package pdftex.def Info: ./img/hmm.pdf used on input line 56.
 (pdftex.def)             Requested size: 72.23969pt x 51.39548pt.
 
 
@@ -547,39 +546,42 @@ ersion <1.6>, but at most version <1.5> allowed
 <./img/hsmm2.pdf, id=12, 280.99078pt x 158.92976pt>
 File: ./img/hsmm2.pdf Graphic file (type pdf)
  <use ./img/hsmm2.pdf>
-Package pdftex.def Info: ./img/hsmm2.pdf used on input line 240.
+Package pdftex.def Info: ./img/hsmm2.pdf used on input line 60.
 (pdftex.def)             Requested size: 87.71906pt x 49.61449pt.
 
-[2] <./img/hsmm-q2.pdf, id=20, 510.16797pt x 393.08817pt>
-File: ./img/hsmm-q2.pdf Graphic file (type pdf)
+Underfull \vbox (badness 5105) has occurred while \output is active []
 
-<use ./img/hsmm-q2.pdf>
-Package pdftex.def Info: ./img/hsmm-q2.pdf used on input line 319.
+ [2]
+<./img/hsmm-q2.pdf, id=20, 510.16797pt x 393.08817pt>
+File: ./img/hsmm-q2.pdf Graphic file (type pdf)
+ <use ./img/hsmm-q2.pdf>
+Package pdftex.def Info: ./img/hsmm-q2.pdf used on input line 139.
 (pdftex.def)             Requested size: 232.19843pt x 178.90938pt.
 
-Overfull \hbox (31.12242pt too wide) in alignment at lines 329--332
+Overfull \hbox (31.12242pt too wide) in alignment at lines 149--152
  [][][] []
  []
 
 
-Overfull \hbox (9.72176pt too wide) in alignment at lines 352--362
+Overfull \hbox (9.72176pt too wide) in alignment at lines 172--182
  [][][] []
  []
 
-[3 <./img/mc.pdf, page is rotated 90 degrees> <./img/hmm.pdf, page is rotated 9
-0 degrees> <./img/hsmm2.pdf, page is rotated 90 degrees> <./img/hsmm-q2.pdf, pa
-ge is rotated 90 degrees>]
+) (./sections/method.tex [3 <./img/mc.pdf, page is rotated 90 degrees> <./img/h
+mm.pdf, page is rotated 90 degrees> <./img/hsmm2.pdf, page is rotated 90 degree
+s> <./img/hsmm-q2.pdf, page is rotated 90 degrees>]
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
- [4]
+) (./sections/exp.tex
+[4]
 
 pdfTeX warning: pdflatex.exe (file ./img/case1-2.pdf): PDF inclusion: found PDF
  version <1.7>, but at most version <1.5> allowed
 <./img/case1-2.pdf, id=83, 249.92271pt x 224.16849pt>
 File: ./img/case1-2.pdf Graphic file (type pdf)
  <use ./img/case1-2.pdf>
-Package pdftex.def Info: ./img/case1-2.pdf used on input line 554.
+Package pdftex.def Info: ./img/case1-2.pdf used on input line 144.
 (pdftex.def)             Requested size: 77.39685pt x 69.41966pt.
 
 
@@ -588,7 +590,7 @@ pdfTeX warning: pdflatex.exe (file ./img/case2-2.pdf): PDF inclusion: found PDF
 <./img/case2-2.pdf, id=84, 246.2821pt x 220.32011pt>
 File: ./img/case2-2.pdf Graphic file (type pdf)
  <use ./img/case2-2.pdf>
-Package pdftex.def Info: ./img/case2-2.pdf used on input line 561.
+Package pdftex.def Info: ./img/case2-2.pdf used on input line 151.
 (pdftex.def)             Requested size: 77.39685pt x 69.23647pt.
 
 
@@ -597,7 +599,7 @@ pdfTeX warning: pdflatex.exe (file ./img/case3-2.pdf): PDF inclusion: found PDF
 <./img/case3-2.pdf, id=85, 249.13477pt x 221.2777pt>
 File: ./img/case3-2.pdf Graphic file (type pdf)
  <use ./img/case3-2.pdf>
-Package pdftex.def Info: ./img/case3-2.pdf used on input line 568.
+Package pdftex.def Info: ./img/case3-2.pdf used on input line 158.
 (pdftex.def)             Requested size: 77.39685pt x 68.74055pt.
 
 
@@ -606,7 +608,7 @@ pdfTeX warning: pdflatex.exe (file ./img/case4-2.pdf): PDF inclusion: found PDF
 <./img/case4-2.pdf, id=86, 252.945pt x 221.40918pt>
 File: ./img/case4-2.pdf Graphic file (type pdf)
  <use ./img/case4-2.pdf>
-Package pdftex.def Info: ./img/case4-2.pdf used on input line 579.
+Package pdftex.def Info: ./img/case4-2.pdf used on input line 169.
 (pdftex.def)             Requested size: 113.52063pt x 99.36969pt.
 
 
@@ -615,7 +617,7 @@ pdfTeX warning: pdflatex.exe (file ./img/case5-2.pdf): PDF inclusion: found PDF
 <./img/case5-2.pdf, id=87, 250.49184pt x 217.86493pt>
 File: ./img/case5-2.pdf Graphic file (type pdf)
  <use ./img/case5-2.pdf>
-Package pdftex.def Info: ./img/case5-2.pdf used on input line 586.
+Package pdftex.def Info: ./img/case5-2.pdf used on input line 176.
 (pdftex.def)             Requested size: 113.52063pt x 98.73642pt.
 
 
@@ -624,7 +626,7 @@ pdfTeX warning: pdflatex.exe (file ./img/case6-2.pdf): PDF inclusion: found PDF
 <./img/case6-2.pdf, id=88, 260.66583pt x 213.65521pt>
 File: ./img/case6-2.pdf Graphic file (type pdf)
  <use ./img/case6-2.pdf>
-Package pdftex.def Info: ./img/case6-2.pdf used on input line 597.
+Package pdftex.def Info: ./img/case6-2.pdf used on input line 187.
 (pdftex.def)             Requested size: 113.52063pt x 93.04684pt.
 
 
@@ -633,31 +635,31 @@ pdfTeX warning: pdflatex.exe (file ./img/case7-2.pdf): PDF inclusion: found PDF
 <./img/case7-2.pdf, id=89, 259.61292pt x 211.89966pt>
 File: ./img/case7-2.pdf Graphic file (type pdf)
  <use ./img/case7-2.pdf>
-Package pdftex.def Info: ./img/case7-2.pdf used on input line 604.
+Package pdftex.def Info: ./img/case7-2.pdf used on input line 194.
 (pdftex.def)             Requested size: 113.52063pt x 92.65736pt.
 
 
-LaTeX Warning: Citation `sigcomm' on page 5 undefined on input line 619.
+LaTeX Warning: Citation `sigcomm' on page 5 undefined on input line 209.
 
 [5 <./img/case1-2.pdf> <./img/case2-2.pdf> <./img/case3-2.pdf>]
-Overfull \hbox (87.94374pt too wide) in paragraph at lines 638--656
+Overfull \hbox (87.94374pt too wide) in paragraph at lines 228--246
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 697--706
+Underfull \hbox (badness 10000) in paragraph at lines 287--296
 []$\OML/cmm/m/it/10 [] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 :\OT1/cmr/m/n/10 5 +
  [][](0\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 1)$ \OT1/ptm/m/n/10 and $\OML/cmm/m/i
 t/10 [] \OT1/cmr/m/n/10 =
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 697--706
+Underfull \hbox (badness 10000) in paragraph at lines 287--296
 []$\OT1/ptm/m/n/10 .
  []
 
 
-Underfull \hbox (badness 3668) in paragraph at lines 697--706
+Underfull \hbox (badness 3668) in paragraph at lines 287--296
 \OT1/ptm/m/n/10 dom-i-nant which makes close-by queries more
  []
 
@@ -666,15 +668,15 @@ df>] <./img/users4.pdf, id=195, 471.26111pt x 451.73767pt>
 File: ./img/users4.pdf Graphic file (type pdf)
 
 <use ./img/users4.pdf>
-Package pdftex.def Info: ./img/users4.pdf used on input line 739.
+Package pdftex.def Info: ./img/users4.pdf used on input line 329.
 (pdftex.def)             Requested size: 232.19843pt x 222.58034pt.
  <./img/incpages2.pdf, id=196, 484.427pt x 451.7387pt>
 File: ./img/incpages2.pdf Graphic file (type pdf)
 
 <use ./img/incpages2.pdf>
-Package pdftex.def Info: ./img/incpages2.pdf used on input line 746.
+Package pdftex.def Info: ./img/incpages2.pdf used on input line 336.
 (pdftex.def)             Requested size: 232.19843pt x 216.52882pt.
- (./dnsSecurityWorkshop.bbl
+) (./dnsSecurityWorkshop18.bbl
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 )
@@ -689,7 +691,7 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[7 <./img/users4.pdf> <./img/incpages2.pdf>] (./dnsSecurityWorkshop.aux)
+[7 <./img/users4.pdf> <./img/incpages2.pdf>] (./dnsSecurityWorkshop18.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -699,13 +701,13 @@ LaTeX Warning: There were undefined references.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 6384 strings out of 493013
- 97060 string characters out of 6137008
+ 6395 strings out of 493013
+ 97277 string characters out of 6137008
  183435 words of memory out of 5000000
- 9804 multiletter control sequences out of 15000+600000
- 53011 words of font info for 113 fonts, out of 8000000 for 9000
+ 9802 multiletter control sequences out of 15000+600000
+ 51385 words of font info for 111 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,19n,46p,931b,3213s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 40i,19n,46p,956b,3213s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/tex
 live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2016
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><c:/texlive/2016/texmf-dis
@@ -733,7 +735,7 @@ pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
 exmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2016/texmf-dist/fonts/t
 ype1/urw/times/utmr8a.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/times/utm
 ri8a.pfb>
-Output written on dnsSecurityWorkshop.pdf (7 pages, 505361 bytes).
+Output written on dnsSecurityWorkshop18.pdf (7 pages, 503403 bytes).
 PDF statistics:
  301 PDF objects out of 1000 (max. 8388607)
  234 compressed objects within 3 object streams

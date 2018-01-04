@@ -64,49 +64,120 @@ component, formatting, style, styling, insert
 \end{IEEEkeywords}
 
 	\section{Introduction}
-	Malware attacks while browsing the internet has become very common in the present day. 
-	In a typical scenario a user goes through a sequence of seemingly harmless websites until reaches websites that are malicious in nature. 
-	Such websites can harm the user in multiple ways such as stealing his private data or exposing his computer to harmful viruses. 
-	Even though many of these websites are already identified and have been blacklisted, new malicious domains keep coming up very frequently. 
-	Considering the above scenario one can readily hypothesis that the actual sequence of websites that the user went through contains information that may help preventing the user from viewing the final malicious one. 
-	%The simplest example is the unknown co-conspirator domain that directs the user to known blacklisted domain.
-	%Also there can potentially be a set of ``gray'' websites that is common across many of these sequences. These ``gray'' domains are not the criminals themselves, but identifying them can give an early indication or a precursor to an upcoming malicious website. 
 	
-	An important source of data for malicious domain detection is the Domain Name Server (DNS) data. 	
-	%An important step to move towards the stated goal is in making use of the vastly available Domain Name System (DNS) data. 
-	When a user makes a request to a website the query reaches a sequence of recursive DNS resolvers, which, through a set of recursive queries, lead to the final queried website's IP address. 
-	Whenever a user browses the Internet, these queries are recorded by DNS servers across the world. 
-	Thus they maintain the sequence of domains that a user went through before landing on a blacklisted domain. 
-	The major barrier preventing one to easily identify this sequence of websites using the DNS requests, is the nature of the available data. 
-	DNS data are maintained in a way that hides the user's identity (IP address) and hence there is no way of telling which domain was requested by which user. 
-	Further, there are many users making requests at the same period of time, and all of these requests are pushed to a single queue of a local DNS resolver. 
-	In other words, given the queue of the resolver, we cannot tell apart individual user's sequences of requests. 
-	Due to this interleaving of requests of multiple users, an important step needs to be performed before being able to warn the users before ending up in the malicious domain, which brings us to the problem of time-series deinterleaving.
-
-	Current work is motivated by application of deinterleaving as a pre-processing step for malicious domain detection but time series deinterleaving is a general problem encountered in various settings. 
-	%Data coming in from multiple sources is observed in many scenarios, while the source of the data is hidden or not known. 
-	Human activity recognition from a set of sensor readings \cite{minot2014separation, landwehr2008modeling} and gene finding, where one needs to identify coding and noncoding regions of a genome sequence \cite{burge1998finding, burge1997prediction} are other applications of deinterleaving. 
+	Deinterleaving temporal data streams is a general machine-learning
+	problem with important applications to security and privacy.
+	Specifically, interleaved network data streams are a common occurrence
+	in cyber-threat monitoring which complicates many analyses.  In many
+	instances, the individual stream identifiers are unavailable due
+	to technical challenges, such as the vantage point of the data
+	collector or are intentionally supressed to protect the privacy
+	of the users in the network.
 	
-
-	To the best of our knowledge deinterleaving has not been applied to resolver queue's data.
-	Some earlier work \cite{gao2013empirical} investigates the use of a sliding window approach to identify new malicious domains by exploring the domains that typically form neighbors of known malicious domains in the resolver queue, while ignoring the actual sequential information. 
-	The challenges of applying existing deinterleavning methods to DNS data is twofold.
-	First, most of the methods has been designed for deinterleaving Markov chains \cite{batu2004inferring, seroussi2009deinterleaving, seroussi2012deinterleaving, minot2014separation} and HMMs \cite{landwehr2008modeling}, and as we will discuss in Section ?, the dynamic of submitting new queries to the local resolver is more complicated than simple Markov chain or HMM.
-	Moreover, the state space of the models and number of sequence sources are very small in previous work applications \cite{minot2014separation, landwehr2008modeling}, while in our application, huge number of websites explodes the size of state space and also tens of users may be active in a network simultaneously.
-	Because of the nature of our dataset, we need to use tools other than those adopted in literature \cite{minot2014separation, landwehr2008modeling,burge1998finding, burge1997prediction}.
-
+	For example, consider packet traces collected in a local area network,
+	where the source IP addresses are removed or data collected from the
+	external-facing interface of a proxy server or NAT firewall
+	where individual client identifiers are unavailable.  Detecting anomalous
+	behavior, especially stealthy and low-volume attack patterns, in
+	these aggregated noisy streams is significantly more challenging than
+	in a traditional deinterleaved setting.
+	
+	In this paper, we discuss a variant of this problem, i.e.,
+	deinterleaving client request streams from recursive DNS resolvers
+	to mine threat intelligence.  Such DNS data streams are shared
+	among Internet service providers (ISPs) through mediums such
+	as the Security Information Exchange (SIE) and are a valuable
+	source of intelligence to the cybersecurity community.  Here, the individual
+	client requests to the recursive DNS resolver are typically suppressed and
+	what we have are inter-resolver communications (i.e, communications
+	between the recursive resolver and the root server, TLD servers
+	and other secondary resolvers).  We are interested in
+	the application of advanced machine-learning techniques to automate
+	the extraction of malware domain groups~\cite{} from such resolver streams.
+	
+	Malware infections while browsing the Internet have become very
+	prevalent and occur due to various reasons such as drive-by exploits,
+	phishing attacks etc.  In a typical infection, the user starts from
+	a landing page and then goes through a sequence of seemingly harmless
+	intermediate websites, until reaching a site that contains the malicious
+	exploit that harm the user by installing malware or stealing private
+	data.  The intermediate sites are typically redirection chains implemented
+	in JavaScript for the purpose of obfuscation.
+	Even though many landing and exploit websites are continously identified and
+	blacklisted, thousands of new malicious domains emerge daily.  However,
+	pieces of the redirection infrastructure get reused across campaigns
+	and thus the actual sequence of websites traversed by the user contains
+	information that may help in quickly identifying new exploit sites.
+	
+	When a user makes a browser request to visit a website, it first
+	resolves the domain name by asking its recursive resolver.  If the
+	answer for the query is cached by the resolver the answer is
+	immediately provided to the client. Otherwise, it initiates a set of
+	recursive queries, leading to the final queried website's IP address.
+	Each webpage may have several embedded objects from many domains
+	leading to a sequence of domain lookup requests emanating from the
+	client.  Tracking the set of DNS requests made by each client is thus
+	a useful means to identifying new and emergent malware infection
+	sequences.  However, to protect user privacy ISPs typically only
+	capture data from the external facing interface of the recursive
+	resolver, effectively suppressing the individual client stream
+	identifiers.  As there are hundreds of users making requests at the
+	same period of time, and all of these requests are pushed to a single
+	queue of a local DNS resolver, we cannot tell apart individual user's
+	sequences of requests and perfectly deinterleaving all requests for
+	deanonymization purposes is impossible.  However, our objective is not
+	deanonymization, but rather extraction of malware domain sequences
+	which are observed repeatedly across resolvers.  We believe that advanced
+	machine learning strategies could be  in such selective
+	deinterleaving of DNS time-series for the extraction of malware
+	domain groups.
 	
 	
-	%Various type of models exist to tackle the time-series deinterleaving problem. The most common is through an extension of Markov models. Markov and Hidden Markov Models (HMM) have been used a lot in separating mixtures in time-series. Since Markov chains are a natural representation of time-series data, using an HMM naturally allows for identifying a background or hidden process, that is governing the generation of the observed data. Such models have been used for deinterleaving human activity recognition data in \cite{minot2014separation, landwehr2008modeling}. As mentioned earlier, work on deinterleaving DNS requests does not exist. Some earlier work \cite{gao2013empirical} investigates the use of a sliding window approach to identify new malicious domains by exploring the domains that typically form neighbors of known malicious domains, while ignoring the actual sequential information. 	Building upon this work, we seek to identify patterns in sequential domain transitions and use those to analyze and identify such ``gray'' websites.  
+	{\bf Prior Work. } To the best of our knowledge deinterleaving has not
+	been applied to DNS resolver queue's data.  Some earlier
+	work \cite{gao2013empirical} investigates the use of a sliding window
+	approach to identify new malicious domains by exploring the domains
+	that typically form neighbors of known malicious domains in the
+	resolver queue, while ignoring the actual sequential information.  The
+	challenges of applying existing deinterleaving methods to DNS data is
+	twofold.  First, most of the methods has been designed for
+	deinterleaving Markov chains \cite{batu2004inferring,
+		seroussi2009deinterleaving, seroussi2012deinterleaving,
+		minot2014separation} and HMMs \cite{landwehr2008modeling}, and as we
+	will discuss in Section ?, the dynamic of submitting new queries to
+	the local resolver is more complicated than simple Markov chain or
+	HMM.  Moreover, the state space of the models and number of sequence
+	sources are very small in previous work
+	applications \cite{minot2014separation, landwehr2008modeling}, while
+	in our application, huge number of websites explodes the size of state
+	space and also tens of users may be active in a network
+	simultaneously.  Because of the nature of our dataset, we need to use
+	tools other than those adopted in
+	literature \cite{minot2014separation,
+		landwehr2008modeling,burge1998finding, burge1997prediction}.
 	
-	Another very useful model for time-series is Recurrent Neural Networks (RNN). 
-	Recently, RNNs and their variants (Gated  Recurrent  Units  (GRUs)\cite{chung2014empirical},  Long  Short-Term  Memory  (LSTMs)  \cite{Hochreiter}) have seen a lot of success in modeling time-series in multiple domains  \cite{bahdanau2014neural, NIPS2008_3449, sutskever2014sequence}. 
-	However, to our knowledge even RNN tools have not been applied to the deinterleaving problem. % setting of DNS request logs as time-series. 
-	Using RNN-type tools for deinterleaving mixed DNS request logs is a completely unexplored area. 
-	Motivated by the power of RNNs to model non-linear dependencies, we seek to apply RNNs to such data and start a new direction of work towards identifying newer malicious domains more efficiently.
+	Another very useful model for time-series is Recurrent Neural Networks
+	(RNN).  Recently, RNNs and their variants (Gated Recurrent Units
+	(GRUs)\cite{chung2014empirical}, Long Short-Term Memory
+	(LSTMs) \cite{Hochreiter}) have seen a lot of success in modeling
+	time-series in multiple domains \cite{bahdanau2014neural,
+		NIPS2008_3449, sutskever2014sequence}.  However, to our knowledge even
+	simple RNN tools have not been applied to the deinterleaving
+	problem. Using RNN-type tools for deinterleaving mixed DNS request
+	logs is a completely unexplored area.  Motivated by the power of RNNs
+	to model non-linear dependencies, we seek to apply RNNs to such data
+	and start a new direction of work towards identifying newer malicious
+	domains more efficiently.
 	
-%	Specifically, using a large labeled dataset of DNS request logs \cite{}, we pose the problem of deinterleaving user requests as a classification problem. We train an RNN to classify the observed DNS request at each time step, where the set of possible users represent the possible classes. The idea is that since the RNN has a hidden state to maintain information about what it has seen until the current time-step, this information should be helpful in identifying the correct user at the current time-step. Using this as our primary model, we experiment extensively with synthetic and real data. By coming up with various models of simulating the real DNS request log, we study the performance of our model across multiple ways of generating synthetic data. We also experiment with a subset of the real data and present our findings on both.
-	
+	% setting of DNS request logs as time-series.
+	{\bf Contributions. } This paper presents a preliminary exploration of
+	the utility of various machine-learning models to address the time
+	series deinterleaving problem for malware domain group extraction.
+	Specifically, we present a model for DNS request generation and
+	resolver-sequence interleaving and evaluate the utility of various
+	inference strategies on sythetic examples including Viterbi, RNNs and
+	LSTMs finding that LSTMs outperform simple RNNs and Viterbi.  Extending
+	this analysis to real and large-scale datasets is future work. 
 	
 	\section{Problem Formulation}
 	\label{sec:gen}

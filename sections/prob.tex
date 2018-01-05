@@ -1,5 +1,6 @@
 	\section{Problem Formulation}
 	\label{sec:gen}
+        \label{subsec:nature}
 
 	%% In this section we first discuss the nature of resolver's data.
 	%% Then we propose a generative model that captures the essence of our understanding of per-user request generation.
@@ -37,9 +38,7 @@
         Figure \ref{fig:hsmm} illustrates these three different user
         model.
 	
-	In this section we present a most detailed model that explains
-        user requests generation based on the process elaborated in
-        Section \ref{subsec:nature}.  We model the browsing process
+        We model the browsing process described above
         using a Hidden Semi-Markov Model (HsMM).  MC and HMM are
         special cases of this process.  The hidden layer of the HsMM
         consists of random variables $W$ representing the browsed
@@ -136,12 +135,11 @@
 	
 	\subsection{Resolver's Sequence Interleaving Model}
 	\label{subsec:interle}
-	As mentioned in Section \ref{subsec:nature}, we have access only to the resolver data queue where users enqueued their domain name requests. 
-	Here we assume that there is a Markov chain governing the ``turn'' of users. 
-	Let's assume that we have $m$ users.
+%	As mentioned in Section \r, we have access only to the resolver data queue where users enqueued their domain name requests. 
+	We model the resolvers queue as a Markov chain governing the ``turn'' of $m$ users.
 	We name the transition matrix of the user's Markov chain as $\A = [\alpha_{ij}] \in \reals^{m \times m}$.
-	Therefore the probability of user $j$ generating the $t$-th request given the current user as $i$ is $\pr(U(t)=j|U(t-1)=i) = \alpha_{ij}$.
-	The random variable $U(t) \in [m]$ represents the active user that has generated the $t$th request of the resolver queue. 
+	Therefore the probability of user $j$ generating the $t$-th request from the $i$-th user is $\pr(U(t)=j|U(t-1)=i) = \alpha_{ij}$.
+	The random variable $U(t) \in [m]$ represents the active user that generated the $t$-th request of the resolver queue. 
 	
 	%	We define the interleaving process as follows.
 	%	To generate the $t$-th request, first we should determine the active user and then a user $i$ is selected to generate the $t$th request in the resolver queue with probability $\alpha_i$. 

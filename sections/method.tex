@@ -11,13 +11,12 @@
         been used for deinterleaving of Markov chains with small
         number of chains (users) and state space
         \cite{minot2014separation}.  Next, we propose to deinterleave
-        using a Recurrent Neural Network (RNN) and a Long-Short Term
-        Memory (LSTM) model which have recently been shown to 
+        using an RNN and an LSTM model which have recently been shown to 
         perform well in many time-series analysis tasks\cite{chung2014empirical,Hochreiter}.
 	
 	\subsection{Inference on Augmented HMM}
-        We can model the whole interleaving process as an Augmented
-        Hidden Markov Model (AHMM) an use learning techniques (like
+        We can model the whole interleaving process as an AHMM
+        and use learning techniques (like
         EM) to learn its parameters and use Viterbi inference to
         determine the most probable hidden (augmented) states $h(t)$
         from which we can extract the most probable user $u(t)$.  The
@@ -31,12 +30,11 @@
         experiments, even when the model parameters are known,
         deinterleaving performs (using Viterbi coding) poorly.
 	
-	\subsection{Inference using RNN}
-        A Recurrent Neural Network (RNN) \cite{lecun2015deep}
-        is a popular approach for modeling time series data. Given
-        the input $v_t$ and hidden state $h_{t-1}$, the RNN computes 
-        the next hidden state representation $h_t$ and output $u_t$ using
-        the following recurrent relationships
+	\subsection{Inference using an RNN}
+        RNNs \cite{lecun2015deep} are popular for modeling time
+        series data. Given the input $v_t$ and hidden state $h_{t-1}$,
+        the RNN computes the next hidden state representation $h_t$
+        and output $u_t$ using the following recurrent relationships
 	\begin{align}
 	\label{eq:rnn}
 	h_{t} &= f(W_v v_{t} + W_h h_{t - 1} + b)\\

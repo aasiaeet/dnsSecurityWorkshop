@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.1.7)  5 JAN 2018 13:38
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.1.7)  5 JAN 2018 13:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -568,7 +568,7 @@ LaTeX Warning: Reference `subsec:nature' on page 2 undefined on input line 139.
 
 [2 <./img/mc.pdf, page is rotated 90 degrees> <./img/hmm.pdf, page is rotated 9
 0 degrees> <./img/hsmm2.pdf, page is rotated 90 degrees>]
-<./img/hsmm-q2.pdf, id=50, 510.16797pt x 393.08817pt>
+<./img/hsmm-q2.pdf, id=44, 510.16797pt x 393.08817pt>
 File: ./img/hsmm-q2.pdf Graphic file (type pdf)
  <use ./img/hsmm-q2.pdf>
 Package pdftex.def Info: ./img/hsmm-q2.pdf used on input line 163.
@@ -675,6 +675,9 @@ Before submitting the final camera ready copy, remember to:
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
  6855 strings out of 494536
@@ -715,7 +718,7 @@ b></usr/local/texlive/2013basic/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></u
 sr/local/texlive/2013basic/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/l
 ocal/texlive/2013basic/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/
 texlive/2013basic/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on dnsSecurityWorkshop18.pdf (6 pages, 411347 bytes).
+Output written on dnsSecurityWorkshop18.pdf (6 pages, 411191 bytes).
 PDF statistics:
  286 PDF objects out of 1000 (max. 8388607)
  225 compressed objects within 3 object streams

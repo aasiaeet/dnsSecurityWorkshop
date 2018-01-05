@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.1.7)  5 JAN 2018 10:20
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.1.7)  5 JAN 2018 13:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -515,9 +515,6 @@ LaTeX Font Info:    Try loading font information for OT1+pcr on input line 13.
 (/usr/local/texlive/2013basic/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Underfull \vbox (badness 1688) has occurred while \output is active []
-
-
 
 LaTeX Warning: Reference `subsec:nature' on page 2 undefined on input line 42.
 
@@ -557,12 +554,12 @@ File: ./img/hsmm2.pdf Graphic file (type pdf)
 Package pdftex.def Info: ./img/hsmm2.pdf used on input line 84.
 (pdftex.def)             Requested size: 87.71906pt x 49.61449pt.
 
-
-LaTeX Warning: Reference `subsec:nature' on page 2 undefined on input line 139.
-
-
 [2 <./img/mc.pdf, page is rotated 90 degrees> <./img/hmm.pdf, page is rotated 9
 0 degrees> <./img/hsmm2.pdf, page is rotated 90 degrees>]
+
+LaTeX Warning: Reference `subsec:nature' on page 3 undefined on input line 139.
+
+
 <./img/hsmm-q2.pdf, id=44, 510.16797pt x 393.08817pt>
 File: ./img/hsmm-q2.pdf Graphic file (type pdf)
  <use ./img/hsmm-q2.pdf>
@@ -673,10 +670,10 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 6842 strings out of 494536
- 102959 string characters out of 6167447
- 187910 words of memory out of 5000000
- 9948 multiletter control sequences out of 15000+600000
+ 6837 strings out of 494536
+ 102885 string characters out of 6167447
+ 186857 words of memory out of 5000000
+ 9943 multiletter control sequences out of 15000+600000
  51900 words of font info for 113 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  38i,19n,44p,954b,452s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -711,7 +708,7 @@ b></usr/local/texlive/2013basic/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></u
 sr/local/texlive/2013basic/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/l
 ocal/texlive/2013basic/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/
 texlive/2013basic/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on dnsSecurityWorkshop18.pdf (6 pages, 409739 bytes).
+Output written on dnsSecurityWorkshop18.pdf (6 pages, 411346 bytes).
 PDF statistics:
  286 PDF objects out of 1000 (max. 8388607)
  225 compressed objects within 3 object streams

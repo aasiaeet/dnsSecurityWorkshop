@@ -5,8 +5,10 @@
 	
 	
 	
-	We start with a synthetic sequence generator and test our RNN-based inference algorithm and then move to the real data. 
-	For the synthetic experiments, we first compare the performances of the Viterbi-based and RNN-based methods in a toy example and then move to examples with larger state space for detail examination of the RNN-based methods. 
+	We start with a synthetic toy example and compare our LSTM inference algorithm with Viterbi as the baseline and then move to larger experiments.
+	In all experiments, LSTM is trained, validated and tested with sequences of size 6, 3, 1 thousands requests, respectively. 
+	
+%	For the synthetic experiments, we first compare the performances of the Viterbi-based and RNN-based methods in a toy example and then move to examples with larger state space for detail examination of the RNN-based methods. 
 	%	The main inference algorithm that we are interested in is the Viterbi algorithm to infer the hidden states and extract the corresponding users. 
 	%	Knowing the model parameter, we check the Viterbi's performance. 
 	%	In the next step, we move to the parameter learning through the Baum–Welch algorithm, which in turn requires Forward-Backward algorithm. 
@@ -39,44 +41,45 @@
 	
 	\subsection{Viterbi vs. RNN}
 	\label{subsec:viterbi}
-	Here we generate synthetic resolver queue using three different user model of Figure \ref{fig:hsmm} and report the Viterbi and RNN methods performance. 
+	Here we generate synthetic resolver queue using the most complicated user model, i.e., HsMM of Figure \ref{fig:hsmm2} and report the Viterbi and LSTM methods performance. 
 	To reduce the computational burden for the Viterbi algorithm, we restrict ourselves to 2 pages, 2 users, and 2 possible requests per page. 
-	In the MC and HMM user models, this results in an AHMM with 8 hidden states and 2 observation. 
-	In the more complicated HsMM user model, there are 32 possible hidden states and 2 observations in the corresponding AHMM. 
-	The users shares vector $\aalpha = (.4, .6)$
+	To make the setup even simpler, user $i$ browse only page $i$ and page $i$ picks from two possible requests at random using Beta(3+$\epsilon$,1+$\delta$) where $\epsilon$ and $\delta$ are independent and uniform over $[0,1]$.
+	Viterbi is tested on the same sequences of size thousand. 
+	Results are averaged over 5 realizations of the synthetic data. 
+	%In the MC and HMM user models, this results in an AHMM with 8 hidden states and 2 observation. 
+	With this setup the size of the hidden state space of the AHMM built from the HsMM user model is 32 and the number of observations is 2. 
+	The users shares vector is $\aalpha = (.4, .6)$.
+	
 	Table \ref{tab:viterbi} summarizes the result:
 	\begin{table}
 		\scriptsize  
 		\centering
-		\begin{tabular}{|c|c|c|c|}
+		\begin{tabular}{|c|c|c|}
 			\hline
-			{\bf User Models} & MC & HMM & HsMM \\ 
-			\hline  
-			Viterbi
-			&  0.6107 	& 0.6107	&  0.6107  \\ \hline 
-			RNN
-			&  0 	& 0		&  0  \\ \hline 
+			{\bf Method} & {\bf Viterbi} & {\bf LSTM} \\ 
+			\hline  			
+			Mean Accuracy	& 0.51	&  0.92  \\ \hline 
+			Std of Accuracy	& 0.02		&  .17  \\ \hline 
 		\end{tabular}
-		\caption{Comparing error rate of Viterbi coding and RNN method for the toy example. {\color{red} Hardik, please populate the second row with the most recent result.}}
+		\caption{Comparing accuracy of Viterbi coding and LSTM methods for the toy example. Results are averaged over 5 realization of the synthetic data.}
 		\label{tab:viterbi}
 	\end{table}
-	Interestingly, the performance of the Viterbi is the same through all different user models. 
-	Looking at the results reveal that Viterbi report all of the hidden users as user 2 which has the higher share in request generation, i.e., $.6$. 
-	So basically Viterbi can not deinterleave. 
+	Interestingly, LSTM outperform Viterbi with a large margin. 
+	Note that we perform Viterbi assuming that HMM parameters are given, and even with this setup Viterbi performs poorly. 
 	
 	\subsection{Synthetic Experiment}
 	\label{subsec:synthetic}
-	{\color{red} All of the results after this part should be re-done using the TensorFlow code.}
-	According to the poor performance of AHMM approach from now on we focus on RNN method of Section ?.
-	We report the results of three synthetic experiments: toy example, scaling users, and scaling pages.
-	In all set of experiments, we generate 100 different sequence of length 1000 according to the request generation and interleaving process of Sections ? and ?.
-	The entire data for each instantiation, (100 different sequences) is divided into training, validation and test sets in the ratio 0.6, 0.2 and 0.2 respectively. 
-	The model parameters that perform the best on the validation set are saved and using these parameters, the results are reported on the test set. 
-	The RNN is trained using the Adam optimizer.
-	
-	\subsubsection{Different Browsing Scenarios}
-	In this toy example we test the results for 7 different scenarios, in all of them we want to deinterleave a sequence generated by two users but the parameters in each experiment is set up differently.
-	Table \ref{tab:toy} specifies the shared parameter setup for the toy example.
+%	{\color{red} All of the results after this part should be re-done using the TensorFlow code.}
+	According to the poor performance of AHMM approach from now on we focus on LSTM method of Section ?.
+	We report the results of seven synthetic experiments only for LSTM. %: toy example, scaling users, and scaling pages.
+	%In all set of experiments, we generate 100 different sequence of length 1000 according to the request generation and interleaving process of Sections ? and ?.
+	%The entire data for each instantiation, (100 different sequences) is divided into training, validation and test sets in the ratio 0.6, 0.2 and 0.2 respectively. 
+	%The model parameters that perform the best on the validation set are saved and using these parameters, the results are reported on the test set. 
+	%The RNN is trained using the Adam optimizer.
+	%\subsubsection{Different Browsing Scenarios}
+	%In this toy example 
+	We test the results for 7 different scenarios, in all of them we want to deinterleave a sequence generated by two users but the parameters in each experiment is set up differently.
+	Table \ref{tab:toy} specifies the shared parameter setup. % for the toy example.
 	Specific user transition and emission matrices are set for different scenarios which are explained in Section \ref{subsub:sparsity}.
 	Note that in our experiments we report results on two set of synthetic data set, where in one we have a users shares vector $\aalpha$ determining the share of each user from the queue's requests.
 	In the other more general data generating scheme, we assume that the users transition matrix $\A$ governs the turn in request submission.
@@ -220,30 +223,22 @@
 	
 	{\bf Discussion:}
 	Table \ref{tab:as} shows the error of our method for all 7 cases of Section \ref{subsub:sparsity} for $a = 10$. 
-	Note that we report the result for both RNN and its variant LSTM. 
+	%Note that we report the result for both RNN and its variant LSTM. 
 	
 	\begin{table}
 		\scriptsize  
 		\centering
-		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 			\hline
-			{\bf \footnotesize Cases} & \multicolumn{2}{c|}{\bf \footnotesize  Case1} & \multicolumn{2}{c|}{\bf \footnotesize  Case2} & \multicolumn{2}{c|}{\bf \footnotesize  Case3} & \multicolumn{2}{c|}{\bf \footnotesize  Case4} & \multicolumn{2}{c|}{\bf \footnotesize  Case5} & \multicolumn{2}{c|}{\bf \footnotesize Case6} & \multicolumn{2}{c|}{\bf \footnotesize  Case7}  \\ 
+			\multicolumn{2}{|c|}{\bf \footnotesize Cases} & {\bf \footnotesize  1} & {\bf \footnotesize  2} & {\bf \footnotesize  3} & {\bf \footnotesize  4} & {\bf \footnotesize  5} & {\bf \footnotesize 6} & {\bf \footnotesize  7}  \\ 
 			\hline  
-			{\bf $\aalpha$} 		
-			&  R 	& L  	&  R	& L 	&  	R 		& L  &  R  & L  & R  	& L 	&  R  	& L 	&  R 	& L \\ \hline 			
-			{\bf \footnotesize  Mean} 		
-			&  0 	& 0		&  0 	& 0		& 	.362 	& .362	& .304 & .29	& .362 &  .36	& .222 &  .214& .286 & .29 \\ \hline 
-			{\bf \footnotesize  Std} 	
-			&  0 	& 0		&  0 	& 0		& 	.015 	& .013	& .039 & .035	& .019 &  .015& .040 &  .035& .060 &  .050\\ \hline 
+			\multirow{2}{*}{$\aalpha$} & {\footnotesize  Mean} 	&  1 	& 1		&  .63 &  .70 & .62 &  .74& .65 \\ \cline{2-9}
+			                           & {\footnotesize  Std} 	&  0 	& 0 	&  .02 &  .02 & .02 &  .05& .04 \\ \hline 
 			\hline  
-			{\bf $\A$} 		
-			&  R 	& L  	&  R	& L 	&  	R 		& L  &  R  & L  & R  	& L 	&  R  	& L 	&  R 	& L \\ \hline 			
-			{\bf \footnotesize  Mean} 		
-			&  0 	& 0		&  0 	& 0		& 	.292 	& .288	& .242 & .239	& .294 &  .292	& .213 &  .209 & .230 & .228 \\ \hline 
-			{\bf \footnotesize  Std} 	
-			&  0 	& 0		&  0 	& 0		& 	.057 	& .053	& .058 & .054	& .105 &  .101 & .057 &  .057 & .056 & .052  \\ \hline 
+			\multirow{2}{*}{$A$}       & {\footnotesize  Mean} 	&  1 	& 1		&  .77 & .69 &  .67 & .82 & .78 \\ \cline{2-9}
+			                           & {\footnotesize  Std} 	&  0 	& 0		&  .10 & .09 &  .08 & .09 & .16 \\ \hline 
 		\end{tabular}
-		\caption{Deinterleaving error of RNN and LSTM for different cases of the toy example when user transitions are determine by either of $\aalpha = [.4, .6]$ or random diagonally dominant $\A$. R and L stand for RNN and LSTM respectively.}
+		\caption{Deinterleaving accuracy of= LSTM for different cases of the synthetic example when user transitions are determine by either of $\aalpha = [.4, .6]$ or random diagonally dominant $\A$.}
 		\label{tab:as}
 	\end{table}
 	
@@ -259,90 +254,90 @@
 	%	Also, we are still measuring accuracy as the exact match between the inferred user and true users for all pages, which as we talked last time is a harsh criterion. 
 	%	Vinod suggested that we should measure the accuracy only for the "popular enough" pages (We would appreciate if you can elaborate on this.)  
 	
-	Since RNN and LSTM performances are very close and LSTM is more computationally demanding, in the following experiments we will only use RNN method. 
-	Note that when we use $\A$ instead of $\aalpha$ the error is smaller. 
-	This can be explained by the fact that with the diagonally dominated user transition matrix $\A$ neighbor requests in the resolver are more probable coming from a same user and this extra structure will help the algorithm to deinterleave more efficiently. 
-	
-	%	\subsubsection{Comparison with Viterbi Coding}
-	
-	
-	\subsubsection{Scalability}
-	In this set of synthetic experiment we increase the number of users and number of webpages report the performance of RNN-based deinterleaving methods. 
-
-	{\bf Scaling Users:}
-	\label{subsub:scalseusr}
-	In this set of experiments we increase the number of users and evaluate the performance of our RNN based method while changing the number of layers and hidden units of RNN. 
-	It is expected that adding more users makes the deinterleaving harder and therefore the error will increase. 
-	We perform two extreme experiments using each $\aalpha$ and $\A$ to control the user transition dynamics: 
-	
-	\begin{itemize}
-		\item User transition with $\aalpha$:
-		\begin{itemize}
-			\item $\aalpha$ is uniform over the users, i.e., $\alpha_i = \frac{1}{m}$. In this case, we expect deinterleaving to be very hard because there is no distinction between request generation rate of users. 
-			%			\item $\aalpha_i$ decreases geometrically in $i$, i.e., $\alpha_i = (1 - 2^{-m})^{-1} \times .5^i $
-		\end{itemize}
-		\item User transition with $\A$:
-		\begin{itemize}
-			%			\item $\alpha_{ii} = .5 + \frac{1}{2} \text{Uniform}(0,1)$ and $\forall i \neq j: \alpha_{ij} = (1 - \alpha_{ii}) \frac{1}{m - 1}$
-			\item $\alpha_{ii} = .5 + \frac{1}{2} \text{Uniform}(0,1)$ and $\alpha_{ij} = 
-			\begin{cases}
-			(1 - \alpha_{ii}) (1 - 2^{-m+1})^{-1} .5^j,     \quad j < i \\
-			(1 - \alpha_{ii}) (1 - 2^{-m+1})^{-1} .5^{j-1}, \quad j > i
-			\end{cases} 
-			$. 
-			Here, we have two properties that we hope to make deinterleaving easier. 
-			First, $\A$ is diagonally dominant which makes close-by queries more probable to come from same users. 
-			Also, the overall probability of picking users as active is non-uniform. 
-		\end{itemize}
-	\end{itemize} 
-	We perform experiment on $2, 5,$ and $10$ users and generate the synthetic data using the Case 6 of Section \ref{subsub:sparsity}. 
-	Maximum number of requests per page is limited to 5 and total number of pages $n$ is $1000$ while the support size of rows of matrices $a$ is $100$. 
-
-	
+%	Since RNN and LSTM performances are very close and LSTM is more computationally demanding, in the following experiments we will only use RNN method. 
+%	Note that when we use $\A$ instead of $\aalpha$ the error is smaller. 
+%	This can be explained by the fact that with the diagonally dominated user transition matrix $\A$ neighbor requests in the resolver are more probable coming from a same user and this extra structure will help the algorithm to deinterleave more efficiently. 
+%	
+%	%	\subsubsection{Comparison with Viterbi Coding}
+%	
+%	
+%	\subsubsection{Scalability}
+%	In this set of synthetic experiment we increase the number of users and number of webpages report the performance of RNN-based deinterleaving methods. 
+%
+%	{\bf Scaling Users:}
+%	\label{subsub:scalseusr}
+%	In this set of experiments we increase the number of users and evaluate the performance of our RNN based method while changing the number of layers and hidden units of RNN. 
+%	It is expected that adding more users makes the deinterleaving harder and therefore the error will increase. 
+%	We perform two extreme experiments using each $\aalpha$ and $\A$ to control the user transition dynamics: 
+%	
+%	\begin{itemize}
+%		\item User transition with $\aalpha$:
+%		\begin{itemize}
+%			\item $\aalpha$ is uniform over the users, i.e., $\alpha_i = \frac{1}{m}$. In this case, we expect deinterleaving to be very hard because there is no distinction between request generation rate of users. 
+%			%			\item $\aalpha_i$ decreases geometrically in $i$, i.e., $\alpha_i = (1 - 2^{-m})^{-1} \times .5^i $
+%		\end{itemize}
+%		\item User transition with $\A$:
+%		\begin{itemize}
+%			%			\item $\alpha_{ii} = .5 + \frac{1}{2} \text{Uniform}(0,1)$ and $\forall i \neq j: \alpha_{ij} = (1 - \alpha_{ii}) \frac{1}{m - 1}$
+%			\item $\alpha_{ii} = .5 + \frac{1}{2} \text{Uniform}(0,1)$ and $\alpha_{ij} = 
+%			\begin{cases}
+%			(1 - \alpha_{ii}) (1 - 2^{-m+1})^{-1} .5^j,     \quad j < i \\
+%			(1 - \alpha_{ii}) (1 - 2^{-m+1})^{-1} .5^{j-1}, \quad j > i
+%			\end{cases} 
+%			$. 
+%			Here, we have two properties that we hope to make deinterleaving easier. 
+%			First, $\A$ is diagonally dominant which makes close-by queries more probable to come from same users. 
+%			Also, the overall probability of picking users as active is non-uniform. 
+%		\end{itemize}
+%	\end{itemize} 
+%	We perform experiment on $2, 5,$ and $10$ users and generate the synthetic data using the Case 6 of Section \ref{subsub:sparsity}. 
+%	Maximum number of requests per page is limited to 5 and total number of pages $n$ is $1000$ while the support size of rows of matrices $a$ is $100$. 
+%
+%	
+%%	\begin{figure}
+%%		\centering
+%%		\includegraphics[width=.7\textwidth]{./img/users4}
+%%		\caption{Comparing error for different user distributions, number of hidden layers and units.}
+%%		\label{fig:user}
+%%	\end{figure}
+%	Fig \ref{fig:user} illustrates that deinterleaving becomes harder as we increase the number of users. 
+%	But for the more realistic setup of user transition with matrix A even for 10 users we can reach 50\% accuracy.
+%	Note that increasing the number of units is not helping the performance and increasing the layers overfits the data. 
+%	
+%	
+%	{\bf Scaling Pages:}
+%%	In this synthetic experiment we test the performance of our algorithm for two users with $\aalpha = [ .4, .6 ]$ while we increase the total number of pages $b$ linearly while keeping the support of each row of matrices as $a = n / 10$. 
+%	In this synthetic experiment we test the performance of our algorithm for two users with matrix $\A$ generated as Section \ref{subsub:scalseusr} while we increase the total number of pages $b$ exponentially while keeping the support of each row of matrices as $a = n / 10$.
+%	Maximum number of requests per page is limited to 5 and total number of pages $b$ is from the set $\{ 10^2, 10^3, 10^4, 10^5 \}$.
+%	Based on the results of the user scalability experiment, we pick single layer RNN with 8 units. 
+%	Fig \ref{fig:incpages} shows that as we increase the number of pages denterleaving becomes harder. 
+%%	\begin{figure}
+%%		\centering
+%%		\includegraphics[width=.7\textwidth]{./img/incpages2}
+%%		\caption{Scaling pages experiments.} 
+%%		\label{fig:incpages}
+%%	\end{figure}
+%%	
 %	\begin{figure}
-%		\centering
-%		\includegraphics[width=.7\textwidth]{./img/users4}
-%		\caption{Comparing error for different user distributions, number of hidden layers and units.}
+%	\centering
+%	\begin{subfigure}[b]{0.45\textwidth}
+%		\includegraphics[width=\textwidth]{./img/users4}
+%		\caption{Increasing number of users.}
 %		\label{fig:user}
-%	\end{figure}
-	Fig \ref{fig:user} illustrates that deinterleaving becomes harder as we increase the number of users. 
-	But for the more realistic setup of user transition with matrix A even for 10 users we can reach 50\% accuracy.
-	Note that increasing the number of units is not helping the performance and increasing the layers overfits the data. 
-	
-	
-	{\bf Scaling Pages:}
-%	In this synthetic experiment we test the performance of our algorithm for two users with $\aalpha = [ .4, .6 ]$ while we increase the total number of pages $b$ linearly while keeping the support of each row of matrices as $a = n / 10$. 
-	In this synthetic experiment we test the performance of our algorithm for two users with matrix $\A$ generated as Section \ref{subsub:scalseusr} while we increase the total number of pages $b$ exponentially while keeping the support of each row of matrices as $a = n / 10$.
-	Maximum number of requests per page is limited to 5 and total number of pages $b$ is from the set $\{ 10^2, 10^3, 10^4, 10^5 \}$.
-	Based on the results of the user scalability experiment, we pick single layer RNN with 8 units. 
-	Fig \ref{fig:incpages} shows that as we increase the number of pages denterleaving becomes harder. 
-%	\begin{figure}
-%		\centering
-%		\includegraphics[width=.7\textwidth]{./img/incpages2}
-%		\caption{Scaling pages experiments.} 
+%	\end{subfigure}
+%	~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+%	%(or a blank line to force the subFig onto a new line)
+%	\begin{subfigure}[b]{0.45\textwidth}
+%		\includegraphics[width=\textwidth]{./img/incpages2}
+%		\caption{Increasing number of pages.}
 %		\label{fig:incpages}
+%	\end{subfigure}
+%	\caption{Scalability Experiment.}%\label{fig:osurfau}
 %	\end{figure}
 %	
-	\begin{figure}
-	\centering
-	\begin{subfigure}[b]{0.45\textwidth}
-		\includegraphics[width=\textwidth]{./img/users4}
-		\caption{Increasing number of users.}
-		\label{fig:user}
-	\end{subfigure}
-	~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
-	%(or a blank line to force the subFig onto a new line)
-	\begin{subfigure}[b]{0.45\textwidth}
-		\includegraphics[width=\textwidth]{./img/incpages2}
-		\caption{Increasing number of pages.}
-		\label{fig:incpages}
-	\end{subfigure}
-	\caption{Scalability Experiment.}%\label{fig:osurfau}
-	\end{figure}
-	
-	\subsection{Real Data}
-	
-	
+%	\subsection{Real Data}
+%	
+%	
 	
 	
 	

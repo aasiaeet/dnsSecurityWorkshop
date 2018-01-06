@@ -6,28 +6,31 @@
 	instances, the individual stream identifiers are unavailable due
 	to technical challenges, such as the vantage point of the data
 	collector or are intentionally supressed to protect the privacy
-	of the users in the network.
+	of users in the network.
 	
 	For example, consider packet traces collected in a local area network,
-	where the source IP addresses are removed or data collected from the
-	external-facing interface of a proxy server or NAT firewall
+	where the source IP addresses are removed, or data collected from the
+	external-facing interface of a proxy server, or a NAT firewall
 	where individual client identifiers are unavailable.  Detecting anomalous
 	behavior, especially stealthy and low-volume attack patterns, in
 	these aggregated noisy streams is significantly more challenging than
 	in a traditional deinterleaved setting.
 	
 	In this paper, we discuss a variant of this problem, i.e.,
-	deinterleaving client request streams from recursive DNS resolvers
-	to mine threat intelligence.  Such DNS data streams are shared
-	among Internet service providers (ISPs) through mediums such
-	as the Security Information Exchange (SIE) and are a valuable
-	source of intelligence to the cybersecurity community.  Here, the individual
-	client requests to the recursive DNS resolver are typically suppressed and
-	what we have are inter-resolver communications (i.e, communications
-	between the recursive resolver and the root server, TLD servers
-	and other secondary resolvers).  We are interested in
-	the application of advanced machine-learning techniques to automate
-	the extraction of malware domain groups~\cite{} from such resolver streams.
+        deinterleaving client request streams from recursive DNS
+        resolvers to mine threat intelligence.  Such DNS data streams
+        are shared among Internet service providers (ISPs) through
+        mediums such as the Security Information Exchange (SIE)
+        ~\cite{gao2013empirical} and are a valuable source of
+        intelligence to the cybersecurity community.  Here, the
+        individual client requests to the recursive DNS resolver are
+        typically suppressed and what we have are inter-resolver
+        communications (i.e, communications between the recursive
+        resolver and the root server, TLD servers and other secondary
+        resolvers).  We are interested in the application of advanced
+        machine-learning techniques to automate the extraction of
+        malware domain groups~\cite{gao2013empirical} from such
+        resolver streams.
 	
 	Malware infections while browsing the Internet have become very
 	prevalent and occur due to various reasons such as drive-by exploits,

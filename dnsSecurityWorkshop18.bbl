@@ -80,9 +80,19 @@ Gadiel Seroussi, Wojciech Szpankowski, and Marcelo~J Weinberger.
 \newblock {\em IEEE Transactions on Information Theory}, 58(12):7094--7109,
   2012.
 
+\bibitem{sophos}
+SophosLabs.
+\newblock Looking ahead: Sophoslabs 2017 malware forecast.
+\newblock 2017.
+
 \bibitem{sutskever2014sequence}
 I.~Sutskever, O.~Vinyals, and Q.~V. Le.
 \newblock Sequence to sequence learning with neural networks.
 \newblock In {\em NIPS}, pages 3104--3112, 2014.
+
+\bibitem{symantec}
+Symantec.
+\newblock 2017 internet security threat report.
+\newblock 2017.
 
 \end{thebibliography}
